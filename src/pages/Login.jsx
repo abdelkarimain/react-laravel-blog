@@ -2,12 +2,17 @@ import React from 'react'
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginStart, loginSuccess, loginFailure } from '../redux/user/userSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
-  const [validationErrors, setValidationErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  // const [validationErrors, setValidationErrors] = useState({});
+  // const [loading, setLoading] = useState(false);
+  const { loading, error: validationErrors } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -17,7 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setValidationErrors({});
+    dispatch(loginStart())
 
     try {
       const response = await fetch("/api/auth/login", {
@@ -30,15 +35,18 @@ const Login = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        const token = responseData.accessToken;
-        setLoading(true);
-        console.info("Welcome back!");
-        navigate("/dashboard");
+
+          dispatch(loginSuccess(responseData))
+          console.info("Welcome back!");
+          // console.info(responseData);
+          navigate("/dashboard");
 
       } else {
         const errorData = await response.json();
         if (errorData) {
-          setValidationErrors(errorData);
+          // setValidationErrors(errorData);
+          dispatch(loginFailure(errorData))
+          console.info(errorData);
         } else {
           console.info("Registration failed.");
         }
@@ -70,7 +78,7 @@ const Login = () => {
         <div className='flex-1'>
 
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-            {validationErrors.message && <Alert color="failure" className='text-sm' >{validationErrors.message}</Alert>}
+            {validationErrors && validationErrors.message && <Alert color="failure" className='text-sm' >{validationErrors.message}</Alert>}
             <div>
               <Label value='Your email' />
               <TextInput
@@ -79,7 +87,7 @@ const Login = () => {
                 id='email'
                 onChange={handleChange}
               />
-              {validationErrors.email && (
+              {validationErrors && validationErrors.email && (
                 <p className='text-red-500'>{validationErrors.email}</p>
               )}
             </div>
@@ -92,7 +100,7 @@ const Login = () => {
                 id='password'
                 onChange={handleChange}
               />
-              {validationErrors.password && (
+              {validationErrors && validationErrors.password && (
                 <p className='text-red-500'>{validationErrors.password}</p>
               )}
             </div>
