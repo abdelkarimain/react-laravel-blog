@@ -7,11 +7,15 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Categories from './pages/Categories';
+import Header from './components/Header';
+import FooterCompo from './components/Footer';
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <Header />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -20,6 +24,8 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
         </Routes>
+
+        <FooterCompo />
       </BrowserRouter>
     </>
   );
