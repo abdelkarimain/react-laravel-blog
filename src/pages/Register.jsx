@@ -1,6 +1,7 @@
 import { Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -75,7 +76,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               {validationErrors.name && (
-                <p className='text-red-500'>{validationErrors.name}</p>
+                <p className='text-red-500 text-sm'>{validationErrors.name}</p>
               )}
             </div>
 
@@ -89,7 +90,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               {validationErrors.email && (
-                <p className='text-red-500'>{validationErrors.email}</p>
+                <p className='text-red-500 text-sm'>{validationErrors.email}</p>
               )}
             </div>
 
@@ -103,7 +104,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               {validationErrors.password && (
-                <p className='text-red-500'>{validationErrors.password}</p>
+                <p className='text-red-500 text-sm'>{validationErrors.password}</p>
               )}
             </div>
 
@@ -117,7 +118,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               {validationErrors.password_confirmation && (
-                <p className='text-red-500'>
+                <p className='text-red-500 text-sm'>
                   {validationErrors.password_confirmation}
                 </p>
               )}
@@ -138,7 +139,7 @@ const Register = () => {
                 'Sign Up'
               )}
             </Button>
-
+              <OAuth />
           </form>
 
           {/* have an account */}
