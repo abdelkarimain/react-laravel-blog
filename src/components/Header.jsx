@@ -5,6 +5,7 @@ import { RiEye2Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom'
 import { toggleTheme } from '../redux/theme/themeSlice';
+import { logoutSuccess } from '../redux/user/userSlice';
 
 const Header = () => {
     const path = useLocation().pathname;
@@ -65,7 +66,7 @@ const Header = () => {
                                 <Dropdown.Item>Profile</Dropdown.Item>
                             </Link>
                             <Dropdown.Divider />
-                            <Dropdown.Item >Sign out</Dropdown.Item>
+                            <Dropdown.Item onClick={() => dispatch(logoutSuccess())}>Sign out</Dropdown.Item>
                         </Dropdown>
                     ) : (
                         <Link to='/register'>
