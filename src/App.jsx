@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Categories from './pages/Categories';
 import Header from './components/Header';
 import FooterCompo from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
@@ -21,8 +22,13 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
+
+          {/* private routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          
         </Routes>
 
         <FooterCompo />
