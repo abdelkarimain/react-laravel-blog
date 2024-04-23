@@ -10,10 +10,16 @@ import Categories from './pages/Categories';
 import Header from './components/Header';
 import FooterCompo from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
     <>
+      <Toaster
+       className = "text-sm"
+        position="top-center"
+        reverseOrder={false}
+      />
       <BrowserRouter>
         <Header />
 
@@ -28,7 +34,7 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
-          
+
         </Routes>
 
         <FooterCompo />

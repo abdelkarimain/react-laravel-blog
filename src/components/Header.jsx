@@ -28,7 +28,7 @@ const Header = () => {
                     </span>
                     {/* <span className='px-2 py-2 bg-gradient-to-r  rounded-lg text-slate-800 flex justify-center items-center'>
                         {/* <span className='text-[#FFDD00] font-bold text-4xl px-1'>{"{"}</span> */}
-                        {/* <span>AIN</span>
+                    {/* <span>AIN</span>
                         <RiEye2Line className='text-4xl font-semibold from-indigo-500 via-purple-500 to-pink-500' />
                         <span>BLOG</span>
                         {/* <span className='text-[#FFDD00] font-bold text-4xl px-1'>{"}"}</span> */}
@@ -55,19 +55,19 @@ const Header = () => {
                             label={
                                 <Avatar alt='user' img={currentUser.image} rounded />
                             }
-                        >
-                            <Dropdown.Header>
-                                <span className='block text-sm'>@{currentUser.username}</span>
-                                <span className='block text-sm font-medium truncate'>
-                                    {currentUser.email}
-                                </span>
-                            </Dropdown.Header>
-                            <Link to={'/dashboard?tab=profile'}>
-                                <Dropdown.Item>Profile</Dropdown.Item>
-                            </Link>
-                            <Dropdown.Divider />
-                            <Dropdown.Item onClick={() => dispatch(logoutSuccess())}>Sign out</Dropdown.Item>
-                        </Dropdown>
+                                >
+                                    <Dropdown.Header>
+                                        <span className='block text-sm'>@{currentUser.username}</span>
+                                        <span className='block text-sm font-medium truncate'>
+                                            {currentUser.email}
+                                        </span>
+                                    </Dropdown.Header>
+                                    <Link to={'/dashboard?tab=profile'}>
+                                        <Dropdown.Item>Profile</Dropdown.Item>
+                                    </Link>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item onClick={() => dispatch(logoutSuccess())}>Sign out</Dropdown.Item>
+                                </Dropdown>
                     ) : (
                         <Link to='/register'>
                             <Button gradientDuoTone='purpleToBlue' outline>
