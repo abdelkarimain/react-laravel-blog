@@ -11,12 +11,14 @@ import Header from './components/Header';
 import FooterCompo from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
+import CreatePost from './pages/CreatePost';
+import AdminRoute from './components/AdminRoute';
 
 const App = () => {
   return (
     <>
       <Toaster
-       className = "text-sm"
+        className="text-sm"
         position="top-center"
         reverseOrder={false}
       />
@@ -34,6 +36,12 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
+
+          {/* Admin routes */}
+          <Route element={<AdminRoute />}>
+            <Route path="/create-post" element={<CreatePost />} />
+          </Route>
+
 
         </Routes>
 

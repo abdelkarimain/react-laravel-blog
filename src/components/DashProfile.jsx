@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateSuccess, updateFailure, updateStart, deleteSuccess, logoutSuccess } from '../redux/user/userSlice';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const DashProfile = () => {
   const dispatch = useDispatch();
@@ -59,11 +60,7 @@ const DashProfile = () => {
         const responseData = await response.json();
         console.log('Response:', responseData);
         dispatch(updateSuccess(responseData))
-        toast.success('Successfully Updated!', {
-          style: {
-            fontSize: '3px'
-          }
-        });
+        toast.success('Successfully Updated!');
       }
 
       if (!response.ok) {
@@ -187,6 +184,17 @@ const DashProfile = () => {
         >
           {loading ? 'Updating...' : 'Update'}
         </Button>
+        {currentUser.is_admin === 1 && (
+          <Link to={'/create-post'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span className='cursor-pointer' onClick={handleDelete}>Delete Account</span>
