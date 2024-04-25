@@ -11,3 +11,69 @@
   box-sizing: border-box;
   @apply text-lg;
 }
+
+body {
+  height: 100vh;
+}
+
+.ql-editor {
+  font-size: 1.05rem;
+}
+
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+
+.post-content h2 {
+  font-size: 1.4rem;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+
+.post-content a {
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+.dark .post-content a {
+  color: red;
+}
+
+/* .dark .ql-fill{
+  fill: rgb(247, 241, 241) !important;
+}
+.dark .ql-stroke{
+  stroke: rgb(247, 241, 241) !important;
+}
+
+.dark .ql-picker-label{
+  color: rgb(247, 241, 241) !important;
+}
+.dark .ql-fill:hover{
+  fill: rgb(13, 75, 133) !important;
+}
+.dark .ql-stroke:hover{
+  stroke: rgb(13, 75, 133) !important;
+}
+
+.dark .ql-picker-label:hover{
+  color: rgb(13, 75, 133);
+}
+
+
+
+.l-picker-options{
+background-color: brown !important;
+}
+ */
