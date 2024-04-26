@@ -15,6 +15,7 @@ const PostPage = () => {
     const [error, setError] = useState(false);
     const [post, setPost] = useState(null);
     const [recentPosts, setRecentPosts] = useState(null);
+    const [relatedPosts, setRelatedPosts] = useState(null);
     const { auth_token } = useSelector((state) => state.user || 'null');
 
     function readingTime(text) {
@@ -85,6 +86,29 @@ const PostPage = () => {
         }
     }, []);
 
+    useEffect(() => {
+        try {
+            const fetchRelatedPosts = async () => {
+                const res = await fetch(`/api/posts/related/${postslug}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${auth_token}`
+                        }
+                    }
+                );
+
+                const data = await res.json();
+                if (res.ok) {
+                    setRelatedPosts(data.relatedPosts);
+                }
+            };
+            fetchRelatedPosts();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }, []);
+
     if (loading)
         return (
             <div className='flex justify-center items-center min-h-screen'>
@@ -143,10 +167,11 @@ const PostPage = () => {
                         rightControl={<Button gradientDuoTone='purpleToPink' pill size="sm">»</Button>}
                         indicators={false}
                     >
-                        {recentPosts &&
-                            recentPosts.map((post) =>
+                        {relatedPosts &&
+                            relatedPosts.map((post) =>
                                 <SliderCard key={post.id} post={post} />
                             )}
+
                     </Carousel>
                 </div>
 

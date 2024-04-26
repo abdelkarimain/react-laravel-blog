@@ -37,7 +37,7 @@ const UpdatePost = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const res = await fetch(`/api/posts/${id}`, {
+                const res = await fetch(`/api/post/findbyid/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${auth_token}`
@@ -79,7 +79,7 @@ const UpdatePost = () => {
             return;
         }
 
-        if (!imageFile && !image) {
+        if (!imageFile && !imageFileUrl) {
             toast('Please select an image!', {
                 icon: '💾',
             });

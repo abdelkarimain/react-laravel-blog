@@ -1,9 +1,8 @@
-import { Badge } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
 const SliderCard = ({ post }) => {
     return (
-        <div className="group relative mb-6 px-20 py-20 rounded-lg border-teal-500">
+        <div className="group relative px-20 py-20 rounded-lg border-teal-500">
             <div className="aspect-[2/1] w-full rounded-lg bg-gray-100 shadow-card transition group-hover:opacity-80">
                 <img src={post.image}
                     className="h-full w-full rounded-lg object-cover"

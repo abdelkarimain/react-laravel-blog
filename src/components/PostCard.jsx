@@ -17,18 +17,18 @@ const PostCard = ({ post }) => {
 
     return (
         <>
-            <div className="group relative mb-6 border-2 p-3 rounded-lg border-teal-500">
+            <div className="group relative mb-6 border-2 p-10 md:p-5 rounded-lg border-teal-500">
                 <div className="aspect-[2/1] w-full rounded-lg bg-gray-100 shadow-card transition group-hover:opacity-80">
                     <img src={post.image}
                         className="h-full w-full rounded-lg object-cover"
                         alt='post cover'
                         loading="lazy" />
                 </div>
-                <div class="mt-8 flex flex-row justify-between">
+                <div className="mt-8 flex flex-row justify-between">
                     <time>{new Date(post.updated_at).toLocaleDateString()} </time>
                     <span>🕒 {readingTime(post.content)} mins</span>
                     <Badge color="warning">{post.category}</Badge>
-                    
+
                 </div>
                 <h3 className="mt-4 text-xl font-bold transition group-hover:text-teal-600 sm:text-2xl">
                     {post.title}

@@ -46,9 +46,67 @@ body {
   text-decoration: underline;
 }
 
-.dark .post-content a {
-  color: red;
+
+
+
+/* Style for code blocks with class .ql-syntax */
+.ql-syntax {
+  @apply bg-slate-200;
+  border: 1px solid #F6F6F7;
+  color: rgb(75 85 99 /1);
+  line-height: 1.5;
+  padding: 1rem;
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
 }
+
+.dark .ql-syntax {
+  @apply bg-slate-800;
+  border: 1px solid rgb(61, 69, 83);
+  color: #e8e7e7;
+}
+
+
+blockquote {
+  display: block;
+  background-color: rgba(123, 0, 211, .2);
+  border-color: rgb(123 0 211 / 1);
+
+  unicode-bidi: isolate;
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  --tw-border-opacity: 1;
+
+  padding: 2rem;
+  font-weight: 500;
+  border-left-width: .25rem;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  box-sizing: border-box;
+}
+
+.dark blockquote {
+  background-color: rgba(255, 219, 77, .2);
+  border-color: rgb(255 219 77 / 1);
+}
+
+
+
+
+
+
 
 /* .dark .ql-fill{
   fill: rgb(247, 241, 241) !important;

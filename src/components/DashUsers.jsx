@@ -5,11 +5,10 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
-
 const DashUsers = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { auth_token } = useSelector((state) => state.user || 'null');
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState('');
   const [tolalUsers, setTotalUsers] = useState(0);
@@ -25,7 +24,7 @@ const DashUsers = () => {
     if (storedPage) {
       setCurrentPage(parseInt(storedPage));
     } else {
-      setCurrentPage(1); 
+      setCurrentPage(1);
     }
     const fetchUsers = async () => {
       try {
@@ -38,6 +37,8 @@ const DashUsers = () => {
         const data = await res.json();
         if (res.ok) {
           setUsers(data.data);
+          console.log('data', data.data);
+          console.log('Users', users);
           setTotalUsers(data.total);
           setTotalPages(Math.ceil(data.total / data.per_page));
         }
@@ -76,13 +77,14 @@ const DashUsers = () => {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+      {console.info(users)}
       {/* top bar with add post */}
       <div className='flex justify-between items-center p-5'>
         <h1 className='font-semibold text-center'>Total Users : {tolalUsers}</h1>
       </div>
 
       {/* posts table */}
-      {currentUser.is_admin && users.length > 0 ? (
+      {currentUser.is_admin && users ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
@@ -92,9 +94,7 @@ const DashUsers = () => {
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>IS-Admin</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
-              {/* <Table.HeadCell>
-                <span>Edit</span>
-              </Table.HeadCell> */}
+              
             </Table.Head>
             {users.map((user) => (
               <Table.Body key={user.id} className='divide-y'>
