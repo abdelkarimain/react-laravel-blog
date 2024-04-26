@@ -14,6 +14,7 @@ import { Toaster } from 'react-hot-toast';
 import CreatePost from './pages/CreatePost';
 import AdminRoute from './components/AdminRoute';
 import UpdatePost from './pages/UpdatePost';
+import PostPage from './pages/PostPage';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path='/post/:postslug' element={<PostPage />} />
 
           {/* private routes */}
           <Route element={<PrivateRoute />}>
