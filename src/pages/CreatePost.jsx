@@ -4,10 +4,11 @@ import toast from 'react-hot-toast';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const CreatePost = () => {
   const [imageFile, setImageFile] = useState(null);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(null);
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [imageFileUrl, setImageFileUrl] = useState(null);
@@ -36,6 +37,27 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!title || !content) {
+      toast('Please add a title and a content!', {
+        icon: '👉',
+      });
+      return;
+    }
+
+    if (!imageFile) {
+      toast('Please select an image!', {
+        icon: '💾',
+      });
+      return;
+    }
+
+    if (content.length < 200) {
+      toast('content must be at least 200 characters', {
+        icon: '👉',
+      });
+      return;
+    }
     const formData = new FormData();
 
     formData.append('title', title);
@@ -43,12 +65,12 @@ const CreatePost = () => {
     formData.append('category', category);
     formData.append('image', imageFile);
 
+
     try {
       const response = await fetch('/api/posts', {
         method: 'POST',
         body: formData,
         headers: {
-          // 'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${auth_token}`
         }
       });
@@ -73,25 +95,29 @@ const CreatePost = () => {
 
   return (
     <div className='p-3 max-w-4xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
+      <div className='flex justify-between p-5 text-center'>
+        <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
+        <Link to='/dashboard?tab=posts'>
+          <Button gradientDuoTone='purpleToPink' className='align-center mt-6 mb-6'>View Posts</Button>
+        </Link>
+      </div>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             type='text'
             placeholder='Title'
-            required
             id='title'
             className='flex-1'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option selected value='none'>Select a category</option>
+            <option value='none'>Select a category</option>
             <option value='javascript'>JavaScript</option>
             <option value='reactjs'>React.js</option>
             <option value='nextjs'>Next.js</option>
           </Select>
-          
+
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput

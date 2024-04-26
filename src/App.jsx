@@ -13,6 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import CreatePost from './pages/CreatePost';
 import AdminRoute from './components/AdminRoute';
+import UpdatePost from './pages/UpdatePost';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
           {/* Admin routes */}
           <Route element={<AdminRoute />}>
             <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/update-post/:id" element={<UpdatePost />} />
           </Route>
 
 
