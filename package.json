@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
+    "clipboard": "^2.0.11",
     "firebase": "^10.11.0",
     "flowbite-react": "^0.9.0",
     "novel": "^0.3.1",
@@ -26,6 +27,7 @@
     "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

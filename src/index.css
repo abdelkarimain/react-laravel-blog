@@ -105,6 +105,71 @@ blockquote {
 
 
 
+/* width: 800px;
+  height: 200px;
+} */
+/* index.css */
+iframe.ql-video {
+  display: block;
+  /* Ensure the iframe behaves like a block element */
+  margin: 0 auto;
+  @apply w-full;
+
+}
+
+@media (min-width: 320px) {
+  iframe.ql-video {
+    @apply h-[170px];
+  }
+}
+
+@media (min-width: 375px) {
+  iframe.ql-video {
+    @apply h-[250px];
+  }
+}
+
+@media (min-width: 525px) {
+  iframe.ql-video {
+    @apply h-[300px];
+  }
+}
+
+@media (min-width: 650px) {
+  iframe.ql-video {
+    @apply h-[350px];
+  }
+}
+
+@media (min-width: 720px) {
+  iframe.ql-video {
+    @apply md:h-[400px];
+    /* @apply w-[300px]; */
+  }
+}
+
+@media (min-width: 850px) {
+  iframe.ql-video {
+    @apply lg:h-[450px];
+  }
+}
+
+
+
+
+/* .copy-button::backdrop {
+	background-color: rgba(0, 0, 0, 0.5);
+} */
+
+/* .copy-code-button:hover {
+	cursor: pointer;
+	background-color: #F2F2F2;
+} */
+
+/* .copy-code-button:active {
+	background-color: #D9D9D9;
+} */
+
 
 
 
@@ -135,3 +200,70 @@ blockquote {
 background-color: brown !important;
 }
  */
+
+
+.copy-code-button {
+  @apply text-gray-500 bg-gray-100 dark:text-gray-400 hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg p-1 text-[14px] inline-flex items-center justify-center border-gray-200 border;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+
+  /* right-align
+	display: block;
+	margin-left: auto;
+	margin-right: 0;
+
+	margin-bottom: -2px;
+	padding: 3px 8px; */
+}
+
+.copy-code-button>span {
+  color: #F1F2F3 !important;
+}
+
+.copy-code-button,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+.copy-code-button::before {
+  display: inline-block;
+  position: relative;
+}
+
+/* .copy-button::backdrop {
+	background-color: rgba(0, 0, 0, 0.5);
+} */
+
+/* .copy-code-button:hover {
+	cursor: pointer;
+	background-color: #F2F2F2;
+} */
+
+/* .copy-code-button:active {
+	background-color: #D9D9D9;
+} */
+
+.copy-code-button:focus {
+  /* Avoid an ugly focus outline on click in Chrome,
+       but darken the button for accessibility.
+       See https://stackoverflow.com/a/25298082/1481479 */
+  /* background-color: #E6E6E6; */
+  outline: 0;
+}
+
+
+
+pre[class*="prettyprint"] {
+  -moz-hyphens: none;
+  hyphens: none;
+  position: relative;
+  overflow: hidden;
+}
+
+ol.linenums {
+  padding: 0;
+  list-style-position: inside;
+  overflow: auto;
+}
