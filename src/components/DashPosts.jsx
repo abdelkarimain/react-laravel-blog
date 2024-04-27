@@ -18,7 +18,7 @@ export default function DashPosts() {
 
 
   useEffect(() => {
-    const storedPage = localStorage.getItem('currentPage');
+    const storedPage = localStorage.getItem('postsCurrentPage');
 
     if (storedPage) {
       setCurrentPage(parseInt(storedPage));
@@ -50,7 +50,7 @@ export default function DashPosts() {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    localStorage.setItem('currentPage', page);
+    localStorage.setItem('postsCurrentPage', page);
   };
 
 

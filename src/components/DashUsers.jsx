@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
-import { FaCheck, FaTimes } from 'react-icons/fa';
-
 const DashUsers = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { auth_token } = useSelector((state) => state.user || 'null');
@@ -19,7 +17,7 @@ const DashUsers = () => {
 
 
   useEffect(() => {
-    const storedPage = localStorage.getItem('currentPage');
+    const storedPage = localStorage.getItem('usersCurrentPage');
 
     if (storedPage) {
       setCurrentPage(parseInt(storedPage));
@@ -53,7 +51,7 @@ const DashUsers = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    localStorage.setItem('currentPage', page);
+    localStorage.setItem('usersCurrentPage', page);
   };
 
 
@@ -166,7 +164,7 @@ const DashUsers = () => {
           <div className='text-center'>
             <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this post?
+              Are you sure you want to delete this user?
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDelete}>

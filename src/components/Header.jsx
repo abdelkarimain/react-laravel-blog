@@ -80,7 +80,9 @@ const Header = () => {
                 </div>
                 <Navbar.Collapse>
                     <Navbar.Link active={path === '/'} as={'div'}>
-                        <Link className='' to='/'>Home</Link>
+                        <Link className='' to='/'>
+                            Home
+                        </Link>
                     </Navbar.Link>
                     <Navbar.Link active={path === '/about'} as={'div'}>
                         <Link className='' to='/about'>About</Link>

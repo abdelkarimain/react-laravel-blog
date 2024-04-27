@@ -189,9 +189,9 @@ const PostPage = () => {
             <div className='mx-auto w-full max-w-2xl lg:max-w-7xl my-10'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Comments</h2>
-                    
+
                 </div>
-                    <CommentSection postId={post.id} />
+                <CommentSection postId={post.id} />
 
             </div>
 
@@ -203,8 +203,8 @@ const PostPage = () => {
                 :
                 <SmallAbout />
             }
-
-            <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10'>
+            {/* related posts */}
+            {/* <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Related articles</h2>
                     <a className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
@@ -225,10 +225,9 @@ const PostPage = () => {
 
                     </Carousel>
                 </div>
+            </div> */}
 
-            </div>
-
-
+            {/* recent posts */}
             <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10 mb-20'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Recent articles</h2>
