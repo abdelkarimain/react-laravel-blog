@@ -45,7 +45,7 @@ const addCopyButtonToCodeBlocks = () => {
 
 
 const PostPage = () => {
-    
+
 
     const { postslug } = useParams();
     const [loading, setLoading] = useState(true);
@@ -186,6 +186,16 @@ const PostPage = () => {
             >
             </div>
 
+            <div className='mx-auto w-full max-w-2xl lg:max-w-7xl my-10'>
+                <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+                    <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Comments</h2>
+                    
+                </div>
+                    <CommentSection postId={post.id} />
+
+            </div>
+
+
             {post.premium === 1 ?
                 <div className='max-w-4xl mx-auto w-full'>
                     <CallToAction />
@@ -218,7 +228,6 @@ const PostPage = () => {
 
             </div>
 
-            {/* <CommentSection postId={post.id} /> */}
 
             <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10 mb-20'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
