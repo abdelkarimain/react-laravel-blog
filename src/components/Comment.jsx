@@ -43,8 +43,10 @@ const Comment = ({ comment, onEdit, onDelete }) => {
     };
 
     const handleSave = async () => {
+        if (!editedContent || editedContent.length > 200) return;
         try {
-            const res = await fetch(`/api/comment/editcomment/${comment.id}`, {
+
+            const res = await fetch(`/api/comment/editComment/${comment.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,6 +88,12 @@ const Comment = ({ comment, onEdit, onDelete }) => {
                     <span className='text-sm ml-3'>
                         {moment(comment.created_at).fromNow()}
                     </span>
+                    <span className='text-xs text-slate-400 font-medium ml-6'>
+
+                        {moment(comment.created_at).fromNow() === moment(comment.updated_at).fromNow() ? null :
+                            'edited ' + moment(comment.updated_at).fromNow()
+                        }
+                    </span>
                 </div>
 
 
@@ -95,8 +103,13 @@ const Comment = ({ comment, onEdit, onDelete }) => {
                             className='mb-2'
                             value={editedContent}
                             onChange={(e) => setEditedContent(e.target.value)}
+                            maxLength='200'
                         />
+
                         <div className='flex justify-end gap-2 text-xs'>
+                            <p className='text-gray-500 text-sm'>
+                                {200 - editedContent.length} characters remaining
+                            </p>
                             <Button
                                 type='button'
                                 size='sm'
@@ -117,10 +130,10 @@ const Comment = ({ comment, onEdit, onDelete }) => {
                         </div>
                     </>
                 ) : (
-                    <>
-                        <p className='dark:text-gray-300 p-4 text-sm'>{comment.content}</p>
-                    </>
+                    <p className='dark:text-gray-300 p-4 text-sm break-all whitespace-pre-wrap'>{comment.content}</p>
                 )}
+
+
             </div>
             <div className='flex-2 mr-2'>
                 {currentUser &&
