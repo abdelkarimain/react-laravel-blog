@@ -7,9 +7,46 @@ import PostCard from '../components/PostCard';
 import { useSelector } from 'react-redux';
 import SmallAbout from '../components/SmallAbout';
 import SliderCard from '../components/SliderCard';
+import ClipboardJS from 'clipboard';
+
+
+const addCopyButtonToCodeBlocks = () => {
+    document.querySelectorAll('pre').forEach(function (codeBlock) {
+        var button = document.createElement('button');
+        button.className = 'copy-code-button';
+        button.type = 'button';
+        var s = codeBlock.innerText;
+        button.setAttribute('data-clipboard-text', s);
+        button.innerText = 'Copy';
+
+        codeBlock.classList.add('prettyprint');
+        codeBlock.appendChild(button);
+    });
+
+    var clipboard = new ClipboardJS('.copy-code-button');
+
+    clipboard.on('success', function (e) {
+        e.trigger.textContent = 'Copied';
+        window.setTimeout(function () {
+            e.trigger.textContent = 'Copy';
+        }, 2000);
+        e.clearSelection();
+
+    });
+
+    clipboard.on('error', function (e) {
+        e.trigger.textContent = 'Error';
+        window.setTimeout(function () {
+            e.trigger.textContent = 'Copy';
+        }, 2000);
+        e.clearSelection();
+    });
+};
 
 
 const PostPage = () => {
+    
+
     const { postslug } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -17,6 +54,10 @@ const PostPage = () => {
     const [recentPosts, setRecentPosts] = useState(null);
     const [relatedPosts, setRelatedPosts] = useState(null);
     const { auth_token } = useSelector((state) => state.user || 'null');
+
+    useEffect(() => {
+        addCopyButtonToCodeBlocks();
+    }, [post]);
 
     function readingTime(text) {
         const wpm = 225;
@@ -163,8 +204,8 @@ const PostPage = () => {
                 </div>
                 <div className='mt-12'>
                     <Carousel
-                        leftControl={<Button gradientDuoTone='purpleToPink' pill size="sm">«</Button>}
-                        rightControl={<Button gradientDuoTone='purpleToPink' pill size="sm">»</Button>}
+                        leftControl={<Button as={"div"} gradientDuoTone='purpleToPink' pill size="sm">«</Button>}
+                        rightControl={<Button as={"div"} gradientDuoTone='purpleToPink' pill size="sm">»</Button>}
                         indicators={false}
                     >
                         {relatedPosts &&
