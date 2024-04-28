@@ -35,9 +35,9 @@ export default function DashPosts() {
         });
         const data = await res.json();
         if (res.ok) {
-          setUserPosts(data.data); 
-          setTotalPosts(data.total);
-          setTotalPages(Math.ceil(data.total / data.per_page));
+          setUserPosts(data.posts.data); 
+          setTotalPosts(data.posts.total);
+          setTotalPages(Math.ceil(data.posts.total / data.posts.per_page));
         }
       } catch (error) {
         console.log(error.message);
@@ -84,7 +84,7 @@ export default function DashPosts() {
       </div>
 
       {/* posts table */}
-      {currentUser.is_admin && userPosts.length > 0 ? (
+      {currentUser.is_admin && userPosts?.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>

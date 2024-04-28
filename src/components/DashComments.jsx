@@ -36,11 +36,11 @@ const DashComments = () => {
         });
         const data = await res.json();
         if (res.ok) {
-          setComments(data.data);
-          console.log('data', data.data);
+          setComments(data.comments.data);
+          console.log('data', data.comments.data);
           console.log('comments', comments);
-          setTotalComments(data.total);
-          setTotalPages(Math.ceil(data.total / data.per_page));
+          setTotalComments(data.comments.total);
+          setTotalPages(Math.ceil(data.comments.total / data.comments.per_page));
         }
       } catch (error) {
         console.log(error.message);

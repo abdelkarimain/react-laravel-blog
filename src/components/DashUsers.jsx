@@ -34,11 +34,11 @@ const DashUsers = () => {
         });
         const data = await res.json();
         if (res.ok) {
-          setUsers(data.data);
-          console.log('data', data.data);
+          setUsers(data.users.data);
+          console.log('data', data.users.data);
           console.log('Users', users);
-          setTotalUsers(data.total);
-          setTotalPages(Math.ceil(data.total / data.per_page));
+          setTotalUsers(data.users.total);
+          setTotalPages(Math.ceil(data.users.total / data.users.per_page));
         }
       } catch (error) {
         console.log(error.message);

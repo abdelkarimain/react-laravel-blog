@@ -30,7 +30,7 @@ const PostCard = ({ post }) => {
                     <Badge color="warning">{post.category}</Badge>
 
                 </div>
-                <h3 className="mt-4 text-xl font-bold transition group-hover:text-teal-600 sm:text-2xl">
+                <h3 className="mt-4 text-xl font-bold transition group-hover:text-teal-600 sm:text-2xl break-all whitespace-pre-wrap">
                     {post.title}
                 </h3>
                 <Link className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/80 absolute inset-0 h-full w-full "
