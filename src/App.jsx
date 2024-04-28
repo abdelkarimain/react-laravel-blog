@@ -16,6 +16,7 @@ import AdminRoute from './components/AdminRoute';
 import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
+import Footer2 from './components/Footer2';
 
 
 
@@ -57,6 +58,7 @@ const App = () => {
         </Routes>
 
         <FooterCompo />
+        {/* <Footer2/> */}
       </BrowserRouter>
     </>
   );
