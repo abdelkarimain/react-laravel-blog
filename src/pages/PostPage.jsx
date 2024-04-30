@@ -213,10 +213,10 @@ const PostPage = () => {
             <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Related articles</h2>
-                    <a className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
-                        href="#">
+                    <Link className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
+                        to={`/all-posts`}>
                         View all →
-                    </a>
+                    </Link>
                 </div>
                 <div className='mt-12'>
                     <Carousel

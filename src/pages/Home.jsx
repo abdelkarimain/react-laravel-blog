@@ -87,8 +87,8 @@ const Home = () => {
   return (
     <div>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
-        <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to my Blog</h1>
-        <p className='text-gray-800 dark:text-gray-300 text-sm sm:text-xl'>
+        <h1 className='text-3xl font-bold lg:text-6xl text-center md:text-start'>Welcome to my Blog</h1>
+        <p className='text-gray-800 dark:text-gray-300 text-sm sm:text-xl text-center md:text-start'>
           Here you'll find a variety of articles and tutorials on topics such as web development,
           software engineering, and programming languages. Explore the latest trends,
           dive into new technologies! 🚀✨💻
@@ -96,7 +96,7 @@ const Home = () => {
 
         <Link
           to='/all-posts'
-          className='text-xs sm:text-lg text-teal-500 font-bold hover:underline'
+          className='text-xs sm:text-lg text-teal-500 font-bold hover:underline text-center md:text-start'
         >
           View all posts
         </Link>

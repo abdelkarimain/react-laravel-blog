@@ -246,10 +246,6 @@ background-color: brown !important;
 } */
 
 .copy-code-button:focus {
-  /* Avoid an ugly focus outline on click in Chrome,
-       but darken the button for accessibility.
-       See https://stackoverflow.com/a/25298082/1481479 */
-  /* background-color: #E6E6E6; */
   outline: 0;
 }
 
@@ -267,4 +263,12 @@ ol.linenums {
   padding: 0;
   list-style-position: inside;
   overflow: auto;
+}
+
+
+.cat-post-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

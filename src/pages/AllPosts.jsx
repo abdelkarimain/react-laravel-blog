@@ -93,8 +93,8 @@ const AllPosts = () => {
     return (
         <div>
             <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
-                <h1 className='text-4xl font-bold lg:text-5xl '>All Posts</h1>
-                <p className='text-gray-800 dark:text-gray-300 text-xl'>
+                <h1 className='text-4xl font-bold lg:text-5xl text-center md:text-start'>All Posts</h1>
+                <p className='text-gray-800 dark:text-gray-300 text- text-center md:text-start'>
                     These are all our posts. Check them out and get inspired.💻
                 </p>
             </div>

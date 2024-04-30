@@ -85,10 +85,10 @@ const Comment = ({ comment, onEdit, onDelete }) => {
                         (<span className='text-sm bg-blue-500 font-bold rounded-lg px-1'>user</span>)
                     }
 
-                    <span className='text-sm ml-3'>
+                    <span className='text-xs md:text-sm ml-3'>
                         {moment(comment.created_at).fromNow()}
                     </span>
-                    <span className='text-xs text-slate-400 font-medium ml-6'>
+                    <span className='text-xs hidden md:block text-slate-400 font-medium ml-6'>
 
                         {moment(comment.created_at).fromNow() === moment(comment.updated_at).fromNow() ? null :
                             'edited ' + moment(comment.updated_at).fromNow()

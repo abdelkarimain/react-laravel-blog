@@ -3,12 +3,12 @@ import aboutsvg from '../assets/about2.svg'
 
 const About = () => {
   return (
-    <div className='min-h-screen flex items-center justify-center'>
+    <div className='min-h-screen mb-7 px-3 flex items-center justify-center'>
       <div className='max-w-7xl mx-auto p-3 text-center'>
         <div>
 
-          <div className='flex flex-col-reverse  md:flex-row'>
-            <div className='flex-1 text-gray-700 dark:text-gray-400 flex flex-col gap-6 text-start md:text-center'>
+          <div className='flex flex-col-reverse md:flex-row '>
+            <div className='flex-1 text-gray-700 dark:text-gray-400 flex flex-col gap-6 text-center'>
               <h1 className='text-3xl  dark:text-white font font-bold text-center my-7'>
                 About My Blog Website
               </h1>
