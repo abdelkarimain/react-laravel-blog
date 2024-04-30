@@ -1,4 +1,4 @@
-import { Modal, Table, Button, Pagination } from 'flowbite-react';
+import { Modal, Table, Button, Pagination, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -6,8 +6,10 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 const DashUsers = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { auth_token } = useSelector((state) => state.user || 'null');
-  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+
+  const [users, setUsers] = useState(null);
   const [userIdToDelete, setUserIdToDelete] = useState('');
   const [tolalUsers, setTotalUsers] = useState(0);
 
@@ -15,7 +17,7 @@ const DashUsers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-
+  // fetch users
   useEffect(() => {
     const storedPage = localStorage.getItem('usersCurrentPage');
 
@@ -26,6 +28,7 @@ const DashUsers = () => {
     }
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`/api/users?page=${currentPage}`, {
           method: 'GET',
           headers: {
@@ -39,9 +42,11 @@ const DashUsers = () => {
           console.log('Users', users);
           setTotalUsers(data.users.total);
           setTotalPages(Math.ceil(data.users.total / data.users.per_page));
+          setLoading(false);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
     if (currentUser.is_admin) {
@@ -49,12 +54,13 @@ const DashUsers = () => {
     }
   }, [currentPage, currentUser.is_admin, auth_token]);
 
+  // handle page change
   const onPageChange = (page) => {
     setCurrentPage(page);
     localStorage.setItem('usersCurrentPage', page);
   };
 
-
+  // handle delete
   const handleDelete = async () => {
     try {
       const res = await fetch(`/api/users/${userIdToDelete}`, {
@@ -72,6 +78,15 @@ const DashUsers = () => {
       console.log(error.message);
     }
   };
+
+  // load spinner
+  if (loading) {
+    return (
+      <div className=' md:mx-auto flex justify-center items-center'>
+        <Spinner size='xl' />
+      </div>
+    );
+  }
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
@@ -92,7 +107,7 @@ const DashUsers = () => {
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>IS-Admin</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
-              
+
             </Table.Head>
             {users.map((user) => (
               <Table.Body key={user.id} className='divide-y'>
@@ -101,13 +116,11 @@ const DashUsers = () => {
                     {new Date(user.updated_at).toLocaleDateString()}
                   </Table.Cell>
                   <Table.Cell>
-                    {/* <Link to={`/post/${user.}`}> */}
                     <img
                       src={user.image}
                       alt={user.name}
                       className='w-10 h-10 object-cover bg-gray-500 rounded-full'
                     />
-                    {/* </Link> */}
                   </Table.Cell>
                   <Table.Cell className='font-medium text-gray-900 dark:text-white'>{user.username}</Table.Cell>
                   <Table.Cell>
@@ -138,6 +151,7 @@ const DashUsers = () => {
               </Table.Body>
             ))}
           </Table>
+          
           {/* Pagination */}
           <div className="flex justify-center mt-4">
             <Pagination

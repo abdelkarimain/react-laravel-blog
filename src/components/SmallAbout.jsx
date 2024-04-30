@@ -11,7 +11,7 @@ const SmallAbout = () => {
                     Checkout these resources with some cool  Projects
                 </p>
                 <Button gradientDuoTone='purpleToPink' className='rounded-tl-xl rounded-bl-none'>
-                    <a href="https://www.100jsprojects.com" target='_blank' rel='noopener noreferrer'>
+                    <a href="https://abdelkarimain.vercel.app" target='_blank' rel='noopener noreferrer'>
                         Checkout My Portfolio
                     </a>
                 </Button>

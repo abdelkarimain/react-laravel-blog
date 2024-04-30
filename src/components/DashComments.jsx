@@ -1,4 +1,4 @@
-import { Modal, Table, Button, Pagination } from 'flowbite-react';
+import { Modal, Table, Button, Pagination, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -7,6 +7,7 @@ import moment from 'moment';
 const DashComments = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { auth_token } = useSelector((state) => state.user || 'null');
+  const [loading, setLoading] = useState(true);
 
   const [comments, setComments] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -28,6 +29,7 @@ const DashComments = () => {
     }
     const fetchComments = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`/api/getallcomments?page=${currentPage}`, {
           method: 'GET',
           headers: {
@@ -41,9 +43,11 @@ const DashComments = () => {
           console.log('comments', comments);
           setTotalComments(data.comments.total);
           setTotalPages(Math.ceil(data.comments.total / data.comments.per_page));
+          setLoading(false);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
     if (currentUser.is_admin) {
@@ -75,6 +79,15 @@ const DashComments = () => {
     }
   };
 
+
+  if (loading) {
+    return (
+      <div className=' md:mx-auto flex justify-center items-center'>
+        <Spinner size='xl' />
+      </div>
+    );
+  }
+
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       {/* top bar with add post */}
@@ -98,7 +111,7 @@ const DashComments = () => {
             {comments.map((comment) => (
               <Table.Body key={comment.id} className='divide-y'>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                <Table.Cell>
+                  <Table.Cell>
                     {new Date(comment.created_at).toLocaleDateString()}
                   </Table.Cell>
                   <Table.Cell>
@@ -109,7 +122,7 @@ const DashComments = () => {
                   </Table.Cell>
 
                   <Table.Cell className='font-medium text-gray-900 dark:text-white'>{comment.post_id}</Table.Cell>
-                  
+
                   <Table.Cell>
                     {comment.user_id}
                   </Table.Cell>

@@ -7,7 +7,7 @@ import {
   HiOutlineUserGroup,
 } from 'react-icons/hi';
 
-import { Button, Table } from 'flowbite-react';
+import { Button, Spinner, Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
 
@@ -24,10 +24,13 @@ const DashboardComp = () => {
   const [lastMonthComments, setLastMonthComments] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
   const { auth_token } = useSelector((state) => state.user || 'null');
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
+    // fetch users
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/users?page=1',
           {
             method: 'GET',
@@ -38,16 +41,21 @@ const DashboardComp = () => {
         );
         const data = await res.json();
         if (res.ok) {
+          setLoading(false);
           setUsers(data.users.data);
           setTotalUsers(data.users.total);
           setLastMonthUsers(data.lastMonthUsers);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
+
+    // fetch posts
     const fetchPosts = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/posts?page=1',
           { method: 'GET', headers: { 'Authorization': `Bearer ${auth_token}` } }
         );
@@ -56,13 +64,18 @@ const DashboardComp = () => {
           setPosts(data.posts.data);
           setTotalPosts(data.posts.total);
           setLastMonthPosts(data.lastMonthPosts);
+          setLoading(false);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
+
+    // fetch comments
     const fetchComments = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/getallcomments?page=1',
           {
             method: 'GET',
@@ -76,9 +89,11 @@ const DashboardComp = () => {
           setComments(data.comments.data);
           setTotalComments(data.comments.total);
           setLastMonthComments(data.lastMonthComments);
+          setLoading(false);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
     if (currentUser.is_admin) {
@@ -88,6 +103,15 @@ const DashboardComp = () => {
     }
   }, [currentUser]);
 
+
+  // load spinner
+  if (loading) {
+    return (
+      <div className=' md:mx-auto flex justify-center items-center'>
+        <Spinner size='xl' />
+      </div>
+    );
+  }
 
   return (
     <div className='p-3 md:mx-auto'>

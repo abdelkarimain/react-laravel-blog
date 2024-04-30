@@ -94,7 +94,7 @@ const CreatePost = () => {
   }
 
   return (
-    <div className='p-3 max-w-4xl mx-auto min-h-screen'>
+    <div className='p-3 max-w-6xl mx-auto min-h-screen'>
       <div className='flex justify-between p-5 text-center'>
         <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
         <Link to='/dashboard?tab=posts'>

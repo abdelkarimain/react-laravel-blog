@@ -1,4 +1,4 @@
-import { Modal, Table, Button, Pagination } from 'flowbite-react';
+import { Modal, Table, Button, Pagination, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ export default function DashPosts() {
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
   const [tolalPosts, setTotalPosts] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +28,7 @@ export default function DashPosts() {
     }
     const fetchPosts = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`/api/posts?page=${currentPage}`, {
           method: 'GET',
           headers: {
@@ -35,12 +37,14 @@ export default function DashPosts() {
         });
         const data = await res.json();
         if (res.ok) {
-          setUserPosts(data.posts.data); 
+          setUserPosts(data.posts.data);
           setTotalPosts(data.posts.total);
           setTotalPages(Math.ceil(data.posts.total / data.posts.per_page));
+          setLoading(false);
         }
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
     if (currentUser.is_admin) {
@@ -71,6 +75,14 @@ export default function DashPosts() {
       console.log(error.message);
     }
   };
+
+  if (loading) {
+    return (
+      <div className=' md:mx-auto flex justify-center items-center'>
+        <Spinner size='xl' />
+      </div>
+    );
+  }
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>

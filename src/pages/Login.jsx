@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStart, loginSuccess, loginFailure } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
+import loginSvg from '../assets/loginSvg.svg';
+import logo from '../assets/logo.svg';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -37,10 +39,10 @@ const Login = () => {
       if (response.ok) {
         const responseData = await response.json();
 
-          dispatch(loginSuccess(responseData))
-          console.info("Welcome back!");
-          // console.info(responseData);
-          navigate("/dashboard");
+        dispatch(loginSuccess(responseData))
+        console.info("Welcome back!");
+        // console.info(responseData);
+        navigate("/dashboard");
 
       } else {
         const errorData = await response.json();
@@ -60,24 +62,26 @@ const Login = () => {
 
   return (
     <div className='min-h-screen mt-20'>
-      <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+      <div className='flex p-3 max-w-5xl mx-auto flex-col md:flex-row md:items-center gap-10'>
         {/* left */}
-        <div className='flex-1'>
-          <Link to='/' className='font-bold dark:text-white text-4xl'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-              Sahand's
-            </span>
-            Blog
-          </Link>
+        <div className='flex-1 text-center'>
+          <img className='hidden md:block w-full' src={loginSvg} alt="" />
+          <a href="https://ainblog.vercel.app" target='_blank' className="inline-flex items-center gap-3 text-xl font-bold">
+            <div className="flex items-center justify-center w-11 h-11 rounded-lg">
+              <img className="" src={logo} alt="" />
+            </div>
+
+            <span className='dark:text-slate-400'>Ain Blog Website</span>
+          </a>
           <p className='text-sm mt-5'>
-            This is a demo project. You can sign in with your email and password
+            You can sign in with your email and password
             or with Google.
           </p>
         </div>
         {/* right */}
 
         <div className='flex-1'>
-
+          <h1 className='text-3xl font-bold py-4 mb-6 text-center'>Sign In To Your Account</h1>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             {validationErrors && validationErrors.message && <Alert color="failure" className='text-sm' >{validationErrors.message}</Alert>}
             <div>

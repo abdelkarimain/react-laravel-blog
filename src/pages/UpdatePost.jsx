@@ -1,4 +1,4 @@
-import { Button, FileInput, Select, TextInput } from 'flowbite-react';
+import { Button, FileInput, Select, Spinner, TextInput } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import ReactQuill from 'react-quill';
@@ -13,11 +13,12 @@ const UpdatePost = () => {
     const [content, setContent] = useState(null);
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('none');
+    const [loading, setLoading] = useState(true);
 
     const { auth_token } = useSelector((state) => state.user || 'null');
     const { id } = useParams();
 
-
+    // editor config
     const modules = {
         toolbar: [
             [{ 'font': [] }, { 'size': [] }],
@@ -32,11 +33,11 @@ const UpdatePost = () => {
         ],
     };
 
-
     // FETCH SINGLE POST 
     useEffect(() => {
         const fetchPost = async () => {
             try {
+                setLoading(true);
                 const res = await fetch(`/api/post/findbyid/${id}`, {
                     method: 'GET',
                     headers: {
@@ -46,6 +47,7 @@ const UpdatePost = () => {
                 const data = await res.json();
                 if (!res.ok) {
                     console.log(data);
+                    setLoading(false);
                     return;
                 }
                 if (res.ok) {
@@ -53,9 +55,11 @@ const UpdatePost = () => {
                     setTitle(data.title);
                     setCategory(data.category);
                     setContent(data.content);
+                    setLoading(false);
                 }
             } catch (error) {
                 console.log(error.message);
+                setLoading(false);
             }
         };
 
@@ -102,6 +106,7 @@ const UpdatePost = () => {
 
 
         try {
+            setLoading(true);
             const response = await fetch(`/api/posts/${id}`, {
                 method: 'POST',
                 body: newFormData,
@@ -111,20 +116,32 @@ const UpdatePost = () => {
             });
             if (response.ok) {
                 toast.success('Post Updated successfully');
+                setLoading(false);
             } else {
                 const errorData = await response.json();
-                alert(errorData.message);
+                toast.error('Something went wrong');
+                console.log(errorData.message);
+                setLoading(false);
 
             }
 
         } catch (error) {
             toast.error('Something went wrong');
+            setLoading(false);
             console.error(error);
         }
     }
 
+    if (loading){
+        return (
+            <div className='flex justify-center items-center min-h-screen'>
+                <Spinner size='xl' />
+            </div>
+        );
+    }
+
     return (
-        <div className='p-3 max-w-4xl mx-auto min-h-screen'>
+        <div className='p-3 max-w-6xl mx-auto min-h-screen'>
             <div className='flex justify-between p-5 text-center'>
                 <h1 className='text-center text-3xl my-7 font-semibold'>Update Post</h1>
                 {/* <Link to='/dashboard?tab=posts'>
@@ -146,7 +163,7 @@ const UpdatePost = () => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     />
-                        {/* <option value='none'>Select a category</option>
+                    {/* <option value='none'>Select a category</option>
                         <option value='javascript'>JavaScript</option>
                         <option value='reactjs'>React.js</option>
                         <option value='nextjs'>Next.js</option>

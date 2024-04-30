@@ -10,7 +10,7 @@ const About = () => {
           <div className='flex flex-col-reverse  md:flex-row'>
             <div className='flex-1 text-gray-700 dark:text-gray-400 flex flex-col gap-6 text-start md:text-center'>
               <h1 className='text-3xl  dark:text-white font font-bold text-center my-7'>
-                About Sahand' Blog
+                About My Blog Website
               </h1>
               <p className='text-xl'>
                 Welcome to my Web Blog! This blog was created by Abdelkarim Ain
