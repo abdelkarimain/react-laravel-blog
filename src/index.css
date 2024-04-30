@@ -260,6 +260,7 @@ pre[class*="prettyprint"] {
   hyphens: none;
   position: relative;
   overflow: hidden;
+  @apply text-sm md:text-sm lg:text-xl;
 }
 
 ol.linenums {

@@ -1,20 +1,65 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { RiEye2Line } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom'
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { logoutSuccess } from '../redux/user/userSlice';
+import { BiSearch } from 'react-icons/bi';
 
 const Header = () => {
     const path = useLocation().pathname;
     const currentUser = useSelector((state) => state.user.currentUser || null);
     const { theme } = useSelector((state) => state.theme);
     const dispatch = useDispatch();
+    const [showSearchModal, setShowSearchModal] = useState(false);
+
+    const [input, setInput] = useState('');
+    const [postsListDefault, setPostsListDefault] = useState();
+    const [postsList, setPostsList] = useState();
+
+
+    const updateInput = async (input) => {
+        const filtered = postsListDefault.filter(post => {
+            return post.title.toLowerCase().includes(input.toLowerCase().trim()) ||
+                post.content.toLowerCase().includes(input.toLowerCase().trim()) ||
+                post.category.toLowerCase().includes(input.toLowerCase().trim())
+        })
+        setInput(input);
+        setPostsList(filtered);
+    }
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const apiLink = `/api/posts/allnopaginate`
+                const res = await fetch(apiLink,
+                    {
+                        method: 'GET',
+                    }
+
+                );
+
+                if (!res.ok) {
+                    throw new Error('Failed to fetch posts');
+                }
+
+                const data = await res.json();
+                setPostsList(data.posts);
+                setPostsListDefault(data.posts);
+            } catch (error) {
+                console.error(error.message);
+                setPostsList([]);
+                setPostsListDefault([]);
+            }
+        };
+        fetchPosts();
+    }, []);
+
     return (
         <>
-            <Navbar className='border-b-2 dark:bg-gradient-to-b from-gray-800 to-gray-900'>
+            <Navbar className='border-b-2 dark:bg-gradient-to-b from-gray-800 to-gray-900 bg-slate-100 text-gray-700'>
                 <Link
                     to='/'
                     className='self-center whitespace-nowrap sm:text-xl font-semibold dark:text-white '
@@ -30,14 +75,26 @@ const Header = () => {
                 </Link>
 
                 <div className='flex gap-2 md:order-2'>
+                    <Button
+                        className="bg-gray-200 border-2 border-gray-300 cursor-pointer me-7" pill
+                        color='gray'
+                        onClick={() => {
+                            setShowSearchModal(!showSearchModal);
+                            setInput('');
+                        }}
+                    >
+                        <BiSearch className='text-xl dark:text-white text-slate-800' />
+                    </Button>
                     {/* theme switch */}
                     <Button
-                        className='w-12 h-10 hidden sm:inline rounded-full'
+                        className='hidden sm:inline bg-gray-200 border-2 border-gray-300'
                         color='gray'
+                        pill
                         onClick={() => dispatch(toggleTheme())}
                     >
-                        {theme === 'light' ? <FaMoon className='text-xl' /> : <FaSun className='w-5 h-5' />}
+                        {theme === 'light' ? <FaMoon className='text-xl' /> : <FaSun className='text-xl' />}
                     </Button>
+
 
 
                     {/* profile dorpdown */}
@@ -63,7 +120,7 @@ const Header = () => {
                         </Dropdown>
                     ) : (
                         <Link to='/register'>
-                            <Button gradientDuoTone='purpleToBlue' outline>
+                            <Button className='bg-gray-200' gradientDuoTone='purpleToBlue' >
                                 Sign In
                             </Button>
                         </Link>
@@ -73,18 +130,62 @@ const Header = () => {
                 </div>
                 <Navbar.Collapse>
                     <Navbar.Link active={path === '/'} as={'div'}>
-                        {/* <Link className='' to='/'>
+                        <Link className='' to='/'>
                             Home
-                        </Link> */}
+                        </Link>
                     </Navbar.Link>
-                    <Navbar.Link active={path === '/about'} as={'div'}>
-                        <Link className='' to='/about'>About</Link>
+                    <Navbar.Link active={path === '/all-posts'} as={'div'}>
+                        <Link className='' to='/all-posts'>
+                            All Posts
+                        </Link>
                     </Navbar.Link>
                     <Navbar.Link active={path === '/categories'} as={'div'}>
                         <Link className='' to='/categories'>All Categories</Link>
                     </Navbar.Link>
+                    <Navbar.Link active={path === '/about'} as={'div'}>
+                        <Link className='' to='/about'>About</Link>
+                    </Navbar.Link>
+                    <Navbar.Link active={path === '/contact'} as={'div'}>
+                        <Link className='' to='/contact'>Contact</Link>
+                    </Navbar.Link>
                 </Navbar.Collapse>
             </Navbar>
+            <div className='w-full'>
+                <div className={showSearchModal ? "absolute self-center left-1/2 shadow-xl transform -translate-x-1/2  min-w-[300px] max-w-[300px] md:min-w-[400px] md:max-w-[400px] xl:min-w-[800px] xl:max-w-[800px] h-[200px] z-50 bg-white dark:bg-slate-600 px-6 overflow-y-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500" : "hidden"} id="search-content">
+                    <div className="container mx-auto py-4 text-black">
+                        <input value={input} onChange={(e) => updateInput(e.target.value)} type="search" placeholder="Search..." autoFocus className="dark:bg-gray-700 dark:text-gray-50 w-full text-grey-800 transition focus:outline-none focus:border-transparent px-3 appearance-none leading-normal text-xl lg:text-2xl" />
+                    </div>
+                    <div>
+                        {input && postsList && postsList.length > 0 ? postsList.map((post) => (
+
+                            <p className="container mx-auto text-black border-b-4 px-4" key={post.id}>
+                                <Link
+                                    to={'/post/' + post.slug}
+                                    className="flex gap-4 py-5 dark:text-gray-50 w-full  text-grey-800 transition focus:outline-none focus:border-transparent px-3 appearance-none leading-normal text-xl lg:text-2xl"
+                                    onClick={() => {
+                                        updateInput('');
+                                        setShowSearchModal(false);
+                                    }}
+                                >
+                                    <img src={post.image} className='w-20 h-11' alt="" />
+                                    <span className='font-bold break-all whitespace-pre-wrap'>{post.title}</span>
+
+                                </Link>
+                            </p>
+                        ))
+
+                            :
+                            <p className="container mx-auto border-b-4 px-4">
+                                <span className='font-bold'>No results</span>
+                            </p>
+                        }
+
+                        {/* Add more links or content here */}
+                    </div>
+                </div>
+            </div>
+
+
         </>
     )
 }

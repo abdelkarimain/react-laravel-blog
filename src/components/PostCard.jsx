@@ -17,7 +17,7 @@ const PostCard = ({ post }) => {
 
     return (
         <>
-            <div className="group relative mb-6 border-2 p-10 md:p-5 rounded-lg border-teal-500">
+            <div className="group relative mb-6 border-2 p-10 bg-white dark:bg-inherit md:p-5 rounded-lg border-teal-500">
                 <div className="aspect-[2/1] w-full rounded-lg bg-gray-100 shadow-card transition group-hover:opacity-80">
                     <img src={post.image}
                         className="h-full w-full rounded-lg object-cover"

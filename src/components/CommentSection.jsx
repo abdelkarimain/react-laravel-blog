@@ -12,6 +12,8 @@ const CommentSection = ({ postId }) => {
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
 
+  const [displayedComments, setDisplayedComments] = useState(3);
+
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
   const navigate = useNavigate();
@@ -94,7 +96,7 @@ const CommentSection = ({ postId }) => {
     setShowModal(false);
     try {
       if (!currentUser) {
-        navigate('/sign-in');
+        navigate('/login');
         return;
       }
       const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
@@ -110,6 +112,16 @@ const CommentSection = ({ postId }) => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  // Function to handle "Show more" button click
+  const handleShowMore = () => {
+    setDisplayedComments(displayedComments + 3);
+  };
+
+  // Function to handle "Show less" button click
+  const handleShowLess = () => {
+    setDisplayedComments(3);
   };
 
 
@@ -134,7 +146,7 @@ const CommentSection = ({ postId }) => {
       ) : (
         <div className='text-teal-500 my-5 flex gap-1'>
           You must be signed in to comment.
-          <Link className='text-blue-500 hover:underline' to={'/sign-in'}>
+          <Link className='text-blue-500 hover:underline' to={'/login'}>
             Sign In
           </Link>
         </div>
@@ -174,13 +186,16 @@ const CommentSection = ({ postId }) => {
         <p className='text-sm my-5'>No comments yet!</p>
       ) : (
         <>
+          {/* Comments count */}
           <div className='text-sm my-5 flex items-center gap-1'>
             <p>Comments</p>
             <div className='border border-gray-400 px-2 rounded-lg'>
               <p>{comments.length}</p>
             </div>
           </div>
-          {comments.map((comment) => (
+
+          {/* Displaying comments */}
+          {comments.slice(0, displayedComments).map((comment) => (
             <Comment
               key={comment.id}
               comment={comment}
@@ -191,6 +206,28 @@ const CommentSection = ({ postId }) => {
               }}
             />
           ))}
+
+          {/* Show more/less buttons */}
+          {comments.length > 3 && (
+            <div className='mt-3 flex justify-center gap-3'>
+              {displayedComments === 3 ? (
+                <Button outline gradientDuoTone='purpleToBlue' onClick={handleShowMore}>
+                  Show more
+                </Button>
+              ) : (
+                <>
+                  <Button outline gradientDuoTone='purpleToBlue' onClick={handleShowLess}>
+                    Show less
+                  </Button>
+                  {comments.length > displayedComments && (
+                    <Button outline gradientDuoTone='purpleToBlue' onClick={handleShowMore}>
+                      Show more
+                    </Button>
+                  )}
+                </>
+              )}
+            </div>
+          )}
         </>
       )}
 

@@ -16,7 +16,8 @@ import AdminRoute from './components/AdminRoute';
 import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
-import Footer2 from './components/Footer2';
+import AllPosts from './pages/AllPosts';
+import Contact from './pages/Contact';
 
 
 
@@ -32,7 +33,7 @@ const App = () => {
         reverseOrder={false}
       />
       <BrowserRouter>
-      <ScrollToTop />
+        <ScrollToTop />
         <Header />
 
         <Routes>
@@ -42,6 +43,8 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/categories" element={<Categories />} />
           <Route path='/post/:postslug' element={<PostPage />} />
+          <Route path="/all-posts" element={<AllPosts />} />
+          <Route path="/contact" element={<Contact />} />
 
           {/* private routes */}
           <Route element={<PrivateRoute />}>

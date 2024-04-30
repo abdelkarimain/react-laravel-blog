@@ -53,6 +53,7 @@ const PostPage = () => {
     const [post, setPost] = useState(null);
     const [recentPosts, setRecentPosts] = useState(null);
     const [relatedPosts, setRelatedPosts] = useState(null);
+
     const { auth_token } = useSelector((state) => state.user || 'null');
 
     useEffect(() => {
@@ -71,7 +72,7 @@ const PostPage = () => {
         return formattedDate;
     }
 
-
+    // fetch post
     useEffect(() => {
         const fetchPost = async () => {
             try {
@@ -103,7 +104,7 @@ const PostPage = () => {
         fetchPost();
     }, [postslug]);
 
-
+    // fetch recent posts
     useEffect(() => {
         try {
             const fetchRecentPosts = async () => {
@@ -127,6 +128,7 @@ const PostPage = () => {
         }
     }, []);
 
+    // fetch related posts
     useEffect(() => {
         try {
             const fetchRelatedPosts = async () => {
@@ -150,15 +152,18 @@ const PostPage = () => {
         }
     }, []);
 
-    if (loading)
+
+    if (loading){
         return (
             <div className='flex justify-center items-center min-h-screen'>
                 <Spinner size='xl' />
             </div>
         );
+    }
+    
     return (
         <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
-            <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
+            <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl break-all whitespace-pre-wrap'>
                 {post && post.title}
             </h1>
             <Link
@@ -181,11 +186,12 @@ const PostPage = () => {
                 </span>
             </div>
             <div
-                className='p-3 max-w-5xl mx-auto w-full post-content'
+                className='p-3 max-w-5xl mx-auto w-full post-content break-all whitespace-pre-wrap'
                 dangerouslySetInnerHTML={{ __html: post && post.content }}
             >
             </div>
 
+            {/* comments section */}
             <div className='mx-auto w-full max-w-2xl lg:max-w-7xl my-10'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Comments</h2>
@@ -204,7 +210,7 @@ const PostPage = () => {
                 <SmallAbout />
             }
             {/* related posts */}
-            {/* <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10'>
+            <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Related articles</h2>
                     <a className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
@@ -225,16 +231,16 @@ const PostPage = () => {
 
                     </Carousel>
                 </div>
-            </div> */}
+            </div>
 
             {/* recent posts */}
             <div className='mx-auto w-full max-w-2xl px-6 lg:max-w-7xl my-10 mb-20'>
                 <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
                     <h2 className="text-3xl font-medium sm:text-3xl lg:text-[30px]">Recent articles</h2>
-                    <a className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
-                        href="#">
+                    <Link className="inline-flex rounded-sm transition duration-300 leading-none focus:outline-none focus-visible:ring-2"
+                        to="/all-posts">
                         View all →
-                    </a>
+                    </Link>
                 </div>
                 <div className='mt-12 grid gap-x-8 gap-y-12 lg:grid-cols-3'>
                     {recentPosts &&
@@ -244,7 +250,6 @@ const PostPage = () => {
                 </div>
 
             </div>
-
         </main>
     );
 }
