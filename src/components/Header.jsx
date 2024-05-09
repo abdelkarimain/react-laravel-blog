@@ -148,6 +148,20 @@ const Header = () => {
                     <Navbar.Link active={path === '/contact'} as={'div'}>
                         <Link className='' to='/contact'>Contact</Link>
                     </Navbar.Link>
+                    <Navbar.Link className='md:hidden' as={'div'}>
+                        {/* theme switch */}
+                        <Button
+                            className='sm:inline bg-gray-200 border-2 border-gray-300'
+                            color='gray'
+                            onClick={() => dispatch(toggleTheme())}
+                        >
+                            {
+                                theme === 'light' ? <><FaMoon className='text-lg me-1' /> Dark</>
+                                    :
+                                    <><FaSun className='text-lg me-1' /> Light</>
+                            }
+                        </Button>
+                    </Navbar.Link>
                 </Navbar.Collapse>
             </Navbar>
             <div className='w-full'>
