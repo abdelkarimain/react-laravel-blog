@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom'
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { logoutSuccess } from '../redux/user/userSlice';
-import { BiSearch } from 'react-icons/bi';
+import { BiSearch, BiX } from 'react-icons/bi';
 
 const Header = () => {
     const path = useLocation().pathname;
@@ -83,7 +83,7 @@ const Header = () => {
                             setInput('');
                         }}
                     >
-                        <BiSearch className='text-xl dark:text-white text-slate-800' />
+                        {showSearchModal ? <BiX className='text-xl dark:text-white text-slate-800' /> : <BiSearch className='text-xl dark:text-white text-slate-800' />}
                     </Button>
                     {/* theme switch */}
                     <Button
@@ -182,7 +182,10 @@ const Header = () => {
                                     }}
                                 >
                                     <img src={post.image} className='w-20 h-11' alt="" />
-                                    <span className='font-bold break-all whitespace-pre-wrap'>{post.title}</span>
+                                    <span className='font-bold break-all whitespace-pre-wrap'>{post.title}
+                                        <br />
+                                        <span className='text-sm bg-slate-400 px-2 py-1'>{post.category}</span>
+                                    </span>
 
                                 </Link>
                             </p>

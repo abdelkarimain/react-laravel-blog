@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import SmallAbout from '../components/SmallAbout';
 import SliderCard from '../components/SliderCard';
 import ClipboardJS from 'clipboard';
+import LikeSection from '../components/LikeSection';
 
 
 const addCopyButtonToCodeBlocks = () => {
@@ -153,14 +154,14 @@ const PostPage = () => {
     }, []);
 
 
-    if (loading){
+    if (loading) {
         return (
             <div className='flex justify-center items-center min-h-screen'>
                 <Spinner size='xl' />
             </div>
         );
     }
-    
+
     return (
         <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
             <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl break-all whitespace-pre-wrap'>
@@ -189,6 +190,10 @@ const PostPage = () => {
                 className='p-3 max-w-5xl mx-auto w-full post-content break-all whitespace-pre-wrap'
                 dangerouslySetInnerHTML={{ __html: post && post.content }}
             >
+            </div>
+
+            <div className="flex items-center justify-center mt-5">
+                <LikeSection postId={post.id} />
             </div>
 
             {/* comments section */}
