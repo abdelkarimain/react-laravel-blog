@@ -8,7 +8,7 @@ const LikeSection = ({ postId }) => {
     const [disLike, setDislike] = useState(false);
     const [nbLikes, setNbLikes] = useState(0);
     const [nbDisLikes, setNbDisLikes] = useState(0);
-    const { auth_token } = useSelector((state) => state.user || 'null');
+    const { auth_token, currentUser } = useSelector((state) => state.user || 'null');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -68,7 +68,7 @@ const LikeSection = ({ postId }) => {
     };
 
     const handleLikeClick = async () => {
-        if (!auth_token) {
+        if (!auth_token || !currentUser) {
             navigate('/login');
             return;
         }
@@ -108,7 +108,7 @@ const LikeSection = ({ postId }) => {
     };
 
     const handleDislikeClick = async () => {
-        if (!auth_token) {
+        if (!auth_token || !currentUser) {
             navigate('/login');
             return;
         }
