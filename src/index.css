@@ -102,12 +102,6 @@ blockquote {
 }
 
 
-
-
-/* width: 800px;
-  height: 200px;
-} */
-/* index.css */
 iframe.ql-video {
   display: block;
   /* Ensure the iframe behaves like a block element */
@@ -154,66 +148,11 @@ iframe.ql-video {
 }
 
 
-
-
-/* .copy-button::backdrop {
-	background-color: rgba(0, 0, 0, 0.5);
-} */
-
-/* .copy-code-button:hover {
-	cursor: pointer;
-	background-color: #F2F2F2;
-} */
-
-/* .copy-code-button:active {
-	background-color: #D9D9D9;
-} */
-
-
-
-
-/* .dark .ql-fill{
-  fill: rgb(247, 241, 241) !important;
-}
-.dark .ql-stroke{
-  stroke: rgb(247, 241, 241) !important;
-}
-
-.dark .ql-picker-label{
-  color: rgb(247, 241, 241) !important;
-}
-.dark .ql-fill:hover{
-  fill: rgb(13, 75, 133) !important;
-}
-.dark .ql-stroke:hover{
-  stroke: rgb(13, 75, 133) !important;
-}
-
-.dark .ql-picker-label:hover{
-  color: rgb(13, 75, 133);
-}
-
-
-
-.l-picker-options{
-background-color: brown !important;
-}
- */
-
-
 .copy-code-button {
   @apply text-gray-500 bg-gray-100 dark:text-gray-400 hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg p-1 text-[14px] inline-flex items-center justify-center border-gray-200 border;
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
-
-  /* right-align
-	display: block;
-	margin-left: auto;
-	margin-right: 0;
-
-	margin-bottom: -2px;
-	padding: 3px 8px; */
 }
 
 .copy-code-button>span {
@@ -230,19 +169,6 @@ background-color: brown !important;
   display: inline-block;
   position: relative;
 }
-
-/* .copy-button::backdrop {
-	background-color: rgba(0, 0, 0, 0.5);
-} */
-
-/* .copy-code-button:hover {
-	cursor: pointer;
-	background-color: #F2F2F2;
-} */
-
-/* .copy-code-button:active {
-	background-color: #D9D9D9;
-} */
 
 .copy-code-button:focus {
   outline: 0;
@@ -267,7 +193,8 @@ ol.linenums {
 
 .cat-post-content {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Limit to 3 lines */
+  -webkit-line-clamp: 1;
+  /* Limit to 3 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
