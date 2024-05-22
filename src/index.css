@@ -15,6 +15,10 @@ body {
   height: 100vh;
 }
 
+html {
+  @apply scrollbar scrollbar-track-slate-600 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500;
+}
+
 .ql-editor {
   font-size: 1.05rem;
 }
@@ -197,4 +201,40 @@ ol.linenums {
   /* Limit to 3 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.ql-editor {
+  @apply p-8 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500;
+}
+
+.ql-editor.ql-blank::before {
+  content: attr(data-placeholder);
+  color: #d3cfcf;
+  font-style: italic;
+  position: absolute;
+  left: 30px;
+  right: 15px;
+  pointer-events: none;
+  height: 0;
+  /* Ensure it doesn't interfere with text input */
+}
+
+
+.blinking-cursor {
+  margin-left: 5px;
+  background-color: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  50.1%,
+  100% {
+    opacity: 0;
+  }
 }

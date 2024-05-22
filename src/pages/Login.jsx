@@ -42,7 +42,7 @@ const Login = () => {
         dispatch(loginSuccess(responseData))
         console.info("Welcome back!");
         // console.info(responseData);
-        navigate("/dashboard");
+        navigate("/dashboard?tab=profile");
 
       } else {
         const errorData = await response.json();
