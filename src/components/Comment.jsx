@@ -70,18 +70,18 @@ const Comment = ({ comment, onEdit, onDelete }) => {
             <div className='flex-shrink-0 mr-3'>
                 <img
                     className='w-10 h-10 rounded-full bg-gray-200'
-                    src={user.image ? user.image : 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}
-                    alt={user.username === 'undefined' ? 'anonymous user' : user.username}
+                    src={user?.image ? user?.image : 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}
+                    alt={user?.username === 'undefined' ? 'anonymous user' : user?.username}
                 />
             </div>
             <div className='flex-1'>
                 <div className='flex items-center mb-1'>
 
                     <span className='font-bold mr-1 text-sm truncate'>
-                        {user && user.username ? `@${user.username}` : ''}
+                        {user && user?.username ? `@${user?.username}` : ''}
                     </span>
 
-                    {user.is_admin === 1 ?
+                    {user?.is_admin === 1 ?
                         (<span className='text-sm bg-green-500 font-bold rounded-lg px-1'>Admin</span>)
                         :
                         (<span className='text-sm bg-blue-500 font-bold rounded-lg px-1'>user</span>)
@@ -139,8 +139,8 @@ const Comment = ({ comment, onEdit, onDelete }) => {
             </div>
             <div className='flex-2 mr-2'>
                 {currentUser &&
-                    (currentUser.id == comment.user_id || currentUser.is_admin === 1) && !isEditing && (
-                        <Dropdown label=" ••• " inline arrowIcon={false}>
+                    (currentUser?.id == comment?.user_id || currentUser?.is_admin === 1) && !isEditing && (
+                        <Dropdown label="•••" inline arrowIcon={false}>
                             <Dropdown.Item onClick={() => handleEdit()}>
                                 <span className='text-sm bg-text-blue-500'>Edit</span>
                             </Dropdown.Item>

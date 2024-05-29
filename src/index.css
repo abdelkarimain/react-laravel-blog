@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   font-family: "Inter", Roboto, sans-serif, Helvetica;
   margin: 0;
@@ -21,6 +20,8 @@ html {
 
 .ql-editor {
   font-size: 1.05rem;
+  @apply py-8 px-8 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500;
+
 }
 
 .post-content p {
@@ -49,18 +50,15 @@ html {
   text-decoration: underline;
 }
 
-
-
-
 /* Style for code blocks with class .ql-syntax */
 .ql-syntax {
   @apply bg-slate-200;
-  border: 1px solid #F6F6F7;
+  border: 1px solid #f6f6f7;
   color: rgb(75 85 99 /1);
   line-height: 1.5;
   padding: 1rem;
-  border-radius: .5rem;
-  margin-bottom: .5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
   white-space: pre-wrap;
   /* Since CSS 2.1 */
   white-space: -moz-pre-wrap;
@@ -79,39 +77,36 @@ html {
   color: #e8e7e7;
 }
 
-
 blockquote {
   display: block;
-  background-color: rgba(123, 0, 211, .2);
+  background-color: rgba(123, 0, 211, 0.2);
   border-color: rgb(123 0 211 / 1);
 
   unicode-bidi: isolate;
-  border-top-right-radius: .5rem;
-  border-bottom-right-radius: .5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   --tw-border-opacity: 1;
 
   padding: 2rem;
   font-weight: 500;
-  border-left-width: .25rem;
+  border-left-width: 0.25rem;
   margin-top: 1.6em;
   margin-bottom: 1.6em;
   box-sizing: border-box;
 }
 
 .dark blockquote {
-  background-color: rgba(255, 219, 77, .2);
+  background-color: rgba(255, 219, 77, 0.2);
   border-color: rgb(255 219 77 / 1);
 }
-
 
 iframe.ql-video {
   display: block;
   /* Ensure the iframe behaves like a block element */
   margin: 0 auto;
   @apply w-full;
-
 }
 
 @media (min-width: 320px) {
@@ -151,7 +146,6 @@ iframe.ql-video {
   }
 }
 
-
 .copy-code-button {
   @apply text-gray-500 bg-gray-100 dark:text-gray-400 hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 rounded-lg p-1 text-[14px] inline-flex items-center justify-center border-gray-200 border;
   position: absolute !important;
@@ -159,8 +153,8 @@ iframe.ql-video {
   right: 0 !important;
 }
 
-.copy-code-button>span {
-  color: #F1F2F3 !important;
+.copy-code-button > span {
+  color: #f1f2f3 !important;
 }
 
 .copy-code-button,
@@ -178,8 +172,6 @@ iframe.ql-video {
   outline: 0;
 }
 
-
-
 pre[class*="prettyprint"] {
   -moz-hyphens: none;
   hyphens: none;
@@ -194,17 +186,12 @@ ol.linenums {
   overflow: auto;
 }
 
-
 .cat-post-content {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   /* Limit to 3 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.ql-editor {
-  @apply p-8 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500;
 }
 
 .ql-editor.ql-blank::before {
@@ -216,25 +203,97 @@ ol.linenums {
   right: 15px;
   pointer-events: none;
   height: 0;
-  /* Ensure it doesn't interfere with text input */
+}
+
+.ql-toolbar {
+  @apply gap-3;
+  padding: 20px !important;
+}
+
+.quill > * {
+  border-color: inherit !important;
+  color: inherit !important;
+}
+.quill > .ql-toolbar {
+  /* border radius of the toolbar */
+  border-radius: 10px 10px 0 0;
+}
+.quill > .ql-container {
+  /* border radius of the container and for font size*/
+  font-size: inherit;
+  border-radius: 0 0 10px 10px;
+}
+.ql-toolbar.ql-snow .ql-picker-label {
+  color: inherit !important;
+  opacity: 0.76;
+}
+.ql-snow .ql-picker {
+  color: inherit !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  /* for placeholder */
+  color: inherit;
+}
+.ql-snow.ql-toolbar button svg {
+  opacity: 0.76;
+  color: currentColor;
+}
+.ql-snow .ql-stroke {
+  /* for the border of the editor */
+  stroke: currentColor !important;
+}
+.ql-snow .ql-fill {
+  /* for the bg color */
+  fill: currentColor !important;
+}
+.ql-picker-item {
+  /* for dropdown */
+  color: #444 !important;
 }
 
 
-.blinking-cursor {
-  margin-left: 5px;
-  background-color: #fff;
-  animation: blink 1s infinite;
+/* Define the font families */
+.ql-font-arial {
+  font-family: Arial, sans-serif;
+}
+.ql-font-comic-sans {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.ql-font-courier-new {
+  font-family: "Courier New", Courier, monospace;
+}
+.ql-font-georgia {
+  font-family: Georgia, serif;
+}
+.ql-font-helvetica {
+  font-family: Helvetica, sans-serif;
+}
+.ql-font-lucida {
+  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 
-@keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  50.1%,
-  100% {
-    opacity: 0;
-  }
+/* Display the correct font names in the toolbar dropdown */
+.ql-font span[data-value="arial"]::before {
+  font-family: Arial, sans-serif;
+  content: "Arial";
+}
+.ql-font span[data-value="comic-sans"]::before {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  content: "Comic Sans";
+}
+.ql-font span[data-value="courier-new"]::before {
+  font-family: "Courier New", Courier, monospace;
+  content: "Courier New";
+}
+.ql-font span[data-value="georgia"]::before {
+  font-family: Georgia, serif;
+  content: "Georgia";
+}
+.ql-font span[data-value="helvetica"]::before {
+  font-family: Helvetica, sans-serif;
+  content: "Helvetica";
+}
+.ql-font span[data-value="lucida"]::before {
+  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  content: "Lucida";
 }

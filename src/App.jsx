@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import 'react-quill/dist/quill.snow.css';
 
 import Home from './pages/Home';
 import About from './pages/About';

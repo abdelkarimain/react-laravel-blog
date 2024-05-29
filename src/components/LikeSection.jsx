@@ -151,13 +151,13 @@ const LikeSection = ({ postId }) => {
         <div className="flex justify-center items-center gap-6">
             <button
                 onClick={handleLikeClick}
-                className={`flex justify-center items-center rounded-full bg-transparent px-4 py-2 ${like ? 'bg-gradient-to-r from-purple-500 to-pink-500' : ''}`}
+                className={`flex justify-center items-center rounded-full bg-transparent px-4 py-2 ${like ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500' : ''}`}
             >
                 <FaRegThumbsUp className='text-2xl w-6 mr-3' /> <span>{nbLikes}</span>
             </button>
             <button
                 onClick={handleDislikeClick}
-                className={`flex justify-center items-center rounded-full bg-transparent px-4 py-2 ${disLike ? 'bg-gradient-to-r from-purple-500 to-pink-500' : ''}`}
+                className={`flex justify-center items-center rounded-full bg-transparent px-4 py-2 ${disLike ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500' : ''}`}
             >
                 <FaRegThumbsDown className='text-2xl w-6 mr-3' /> <span>{nbDisLikes}</span>
             </button>
