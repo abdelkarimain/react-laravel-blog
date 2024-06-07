@@ -1,7 +1,9 @@
 import { Badge } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const PostCard = ({ post }) => {
+    const { t } = useTranslation();
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
@@ -26,7 +28,7 @@ const PostCard = ({ post }) => {
                 </div>
                 <div className="mt-8 flex flex-row justify-between">
                     <time>{new Date(post.updated_at).toLocaleDateString()} </time>
-                    <span>🕒 {readingTime(post.content)} mins</span>
+                    <span>🕒 {readingTime(post.content)} {t("mins")}</span>
                     <Badge color="warning">{post.category}</Badge>
 
                 </div>

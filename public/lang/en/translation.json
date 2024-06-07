@@ -1,0 +1,26 @@
+{
+    "language": "Language",
+    "home": "Home",
+    "allPosts": "All Posts",
+    "allCats": "All Categories",
+    "about":"About Us",	
+    "contact": "Contact Us",
+    "dark" : "Dark",
+    "light" : "Light",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "search": "Search...",
+    "noResults": "No results found",
+    "welcomeToBlog": "Welcome to my Blog",
+    "homeDescription": "Here you'll find a variety of articles and tutorials on topics such as web development, software engineering, and programming languages. Explore the latest trends, dive into new technologies! 🚀✨💻",
+    "viewAllPBtn":"View all posts",
+    "callToActionDes":"Want to get more interesting posts?",
+    "checkoutThis": "Checkout these resources with some cool Projects",
+    "chckMyPortfolio": "Checkout My Portfolio",
+    "all": "All",
+    "recentPosts": "Recent Posts",
+
+    "mins": "mins",
+    "nextPage": "Next",
+    "prevPage": "Prev"
+}
