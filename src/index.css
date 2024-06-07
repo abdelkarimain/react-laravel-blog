@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Inter", Roboto, sans-serif, Helvetica;
+  font-family: "Noto Kufi Arabic", Roboto, sans-serif, Helvetica;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -179,9 +179,9 @@ const Header = () => {
 
           <Navbar.Toggle />
         </div>
-        <Navbar.Collapse>
+        <Navbar.Collapse as={"div"}>
           <Navbar.Link active={path === "/"} as={"div"}>
-            <Link className="" to="/">
+            <Link className="md:mx-4" to="/">
               {t("home") || "Home"}
             </Link>
           </Navbar.Link>

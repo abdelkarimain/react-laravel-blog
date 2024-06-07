@@ -1,9 +1,9 @@
 {
     "language": "Langue",
     "home": "Accueil",
-    "allPosts": "Tous les articles",
-    "allCats": "Toutes les catégories",
-    "about": "À propos de nous",
+    "allPosts": "Articles",
+    "allCats": "Catégories",
+    "about": "À propos",
     "contact": "Contactez-nous",
     "dark": "Sombre",
     "light": "Clair",
