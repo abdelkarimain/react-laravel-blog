@@ -4,10 +4,10 @@ const useTypingEffect = (text, speed = 50) => {
   const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
-    if (!text) return; // Prevent running the effect if text is empty or undefined
+    if (!text) return;
 
     let currentIndex = 0;
-    setDisplayedText(''); // Reset displayed text when text changes
+    setDisplayedText('');
 
     const interval = setInterval(() => {
       setDisplayedText((prev) => prev + text[currentIndex]);
